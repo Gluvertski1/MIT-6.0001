@@ -12,7 +12,7 @@
 import random
 import string
 
-WORDLIST_FILENAME = "words.txt"
+WORDLIST_FILENAME = r'C:\Users\Jared\Desktop\MIT 6.0001\Problem Set 2\words.txt'
 
 
 def load_words():
@@ -61,8 +61,18 @@ def is_word_guessed(secret_word, letters_guessed):
       False otherwise
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
+    state = True
+    for index in range(len(secret_word)):
+          for i in letters_guessed:
+                if index == i:
+                      state = True and state
+                else:
+                      state = False and state
+    
+    if state:
+          return True
+    else:
+          return False
 
 
 def get_guessed_word(secret_word, letters_guessed):
@@ -73,9 +83,20 @@ def get_guessed_word(secret_word, letters_guessed):
       which letters in secret_word have been guessed so far.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    secret_word_guess = ''
+    i = 0
+    for char in secret_word:
+      for index in letters_guessed:
+        if index != char:      
+          pass
+        else:
+          secret_word_guess = secret_word_guess[0:i] + char
+        
+      secret_word_guess = secret_word_guess + '_ '
 
-
+      i = i + 1
+    secret_word_guess = secret_word_guess[0:len(secret_word)]
+    return secret_word_guess
 
 def get_available_letters(letters_guessed):
     '''
@@ -84,9 +105,16 @@ def get_available_letters(letters_guessed):
       yet been guessed.
     '''
     # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-    
-    
+    import string
+    return_string = string.ascii_lowercase
+    i = 0
+    for char in return_string:
+      for index in letters_guessed:
+        if index == char:      
+          return_string = return_string[0:i] + return_string[i+1::]
+          i -= 1
+      i += 1
+    return return_string
 
 def hangman(secret_word):
     '''
